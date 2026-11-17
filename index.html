@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCMX | Soluciones Creativas de Calidad</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.imgur.com/G4q1In8.png">
+    
+    <!-- Thumbnail / Open Graph Meta Tags -->
+    <meta property="og:title" content="CCMX - Soluciones Creativas a Precios Accesibles">
+    <meta property="og:description" content="Impulsa tu negocio físico o digital con videos publicitarios, animación de logos, páginas web y más.">
+    <meta property="og:image" content="https://i.imgur.com/7UyeAdC.png">
+    <meta property="og:url" content="https://ccmx.site">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://i.imgur.com/7UyeAdC.png">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        darkBg: '#070a12',
+                        cardBg: '#101726',
+                        goldAccent: '#fbbf24',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Fondo animado sutil con orbes flotantes */
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -40px) scale(1.1); }
+            66% { transform: translate(-25px, 25px) scale(0.95); }
+        }
+        .orb-1 {
+            animation: floatOrb 12s ease-in-out infinite;
+        }
+        .orb-2 {
+            animation: floatOrb 16s ease-in-out infinite reverse;
+        }
+
+        /* Resplandor que sigue al cursor */
+        #cursor-glow {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.12) 0%, rgba(251, 191, 36, 0) 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Efecto de destello en botones */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -75%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 100%);
+            transform: rotate(25deg);
+            transition: all 0.6s ease;
+        }
+        .btn-shine:hover::after {
+            left: 130%;
+        }
+
+        /* Animación de pulso para WhatsApp */
+        @keyframes pulseRing {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        .whatsapp-pulse {
+            animation: pulseRing 2.5s infinite;
+        }
+
+        /* Animación de aparición al hacer scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-100 font-sans antialiased selection:bg-amber-400 selection:text-black relative overflow-x-hidden">
+
+    <!-- Halo luminoso dinámico del cursor -->
+    <div id="cursor-glow" class="hidden md:block"></div>
+
+    <!-- Fondo Dinámico con Orbes de Luz -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="orb-1 absolute -top-24 -left-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
+        <div class="orb-2 absolute top-1/2 -right-24 w-[30rem] h-[30rem] bg-yellow-600/10 rounded-full blur-3xl"></div>
+        <div class="orb-1 absolute -bottom-32 left-1/3 w-80 h-80 bg-amber-400/5 rounded-full blur-3xl"></div>
+        <!-- Cuadrícula sutil tecnológica -->
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+    </div>
+
+    <!-- Botón Flotante de WhatsApp (Verde con Blanco) -->
+    <a href="https://wa.link/5q7oai" target="_blank" rel="noopener noreferrer" 
+       class="fixed bottom-6 right-6 z-40 bg-green-600 hover:bg-green-500 text-white p-4 rounded-full shadow-2xl transition-transform duration-300 hover:scale-110 flex items-center justify-center whatsapp-pulse"
+       title="Contáctanos por WhatsApp">
+        <i class="fa-brands fa-whatsapp text-3xl text-white"></i>
+    </a>
+
+    <!-- Header / Navegación -->
+    <header class="sticky top-0 z-30 backdrop-blur-lg bg-darkBg/80 border-b border-gray-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <img src="https://i.imgur.com/G4q1In8.png" alt="CCMX Logo" class="h-11 w-11 rounded-xl object-cover border-2 border-amber-400 group-hover:rotate-6 transition-transform duration-300">
+                <span class="text-2xl font-black tracking-wider bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-500 bg-clip-text text-transparent">CCMX</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-300">
+                <a href="#servicios" class="hover:text-amber-400 transition-colors">Servicios</a>
+                <a href="#contacto" class="hover:text-amber-400 transition-colors">Cotización</a>
+            </div>
+            <div>
+                <!-- Botón WhatsApp Header (Verde con Blanco) -->
+                <a href="https://wa.link/5q7oai" target="_blank" class="btn-shine bg-green-600 hover:bg-green-500 text-white font-bold px-4 sm:px-5 py-2.5 rounded-xl shadow-lg hover:shadow-green-500/30 transition-all transform hover:-translate-y-0.5 flex items-center space-x-2 text-xs sm:text-sm">
+                    <i class="fa-brands fa-whatsapp text-lg text-white"></i>
+                    <span>+52 777 271 3340</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sección Principal (Hero) -->
+    <section class="relative z-10 py-20 lg:py-28">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center space-x-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 animate-bounce">
+                <i class="fa-solid fa-bolt"></i>
+                <span>Soluciones Creativas de Calidad</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-tight mb-6">
+                Soluciones creativas a <span class="bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">precios accesibles</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto mb-10 font-light">
+                Para emprendimientos y negocios, tanto físicos como digitales. Destaca frente a tu competencia con contenido profesional de alto impacto.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <!-- Botón WhatsApp Hero (Verde con Blanco) -->
+                <a href="https://wa.link/5q7oai" target="_blank" class="btn-shine w-full sm:w-auto bg-green-600 hover:bg-green-500 text-white font-extrabold px-8 py-4 rounded-2xl shadow-xl hover:shadow-green-500/30 hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3 text-lg">
+                    <i class="fa-brands fa-whatsapp text-2xl text-white"></i>
+                    <span>¡Cotización Gratuita por WhatsApp!</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Servicios -->
+    <section id="servicios" class="relative z-10 py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-3xl sm:text-5xl font-black tracking-tight mb-4">Nuestros <span class="text-amber-400">Servicios</span></h2>
+            <div class="w-24 h-1.5 bg-gradient-to-r from-amber-400 to-yellow-500 mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Servicio 1 -->
+            <div class="reveal bg-cardBg/90 backdrop-blur-md border border-gray-800 rounded-3xl p-8 hover:border-amber-400/60 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-500/10 flex flex-col justify-between relative overflow-hidden group">
+                <div class="absolute top-0 right-0 bg-gradient-to-r from-amber-400 to-yellow-500 text-gray-950 font-black px-5 py-1.5 rounded-bl-2xl text-xs uppercase tracking-wider shadow-md">
+                    ¡Promoción!
+                </div>
+                <div>
+                    <div class="flex items-center space-x-4 mb-6">
+                        <span class="w-12 h-12 bg-amber-400 text-gray-950 rounded-2xl font-black text-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">1</span>
+                        <h3 class="text-2xl font-bold">Videos Publicitarios para Redes Sociales</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-300 mb-6">
+                        <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-amber-400"></i><span>Impulsa tu producto o servicio.</span></li>
+                        <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-amber-400"></i><span>Atrae más clientes y aumenta tus ventas.</span></li>
+                        <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-amber-400"></i><span>Estilo Animado o Realista (¡Tenemos paquetes!).</span></li>
+                        <li class="flex items-center space-x-3 text-sm text-gray-400 pt-2"><i class="fa-solid fa-clapperboard text-amber-400"></i><span>Duración: 20 a 35 seg | Formato: Reel</span></li>
+                    </ul>
+                </div>
+                <div class="border-t border-gray-800 pt-6 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs text-gray-400 block line-through">Precio regular: $99 MXN</span>
+                        <span class="text-3xl font-black text-amber-400">$49 <span class="text-sm font-normal text-gray-300">MXN (1er video)</span></span>
+                    </div>
+                    <a href="https://wa.link/5q7oai" target="_blank" class="btn-shine bg-green-600 hover:bg-green-500 text-white font-bold px-5 py-2.5 rounded-xl transition-transform active:scale-95 shadow-md flex items-center space-x-2">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>Solicitar</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Servicio 2 -->
+            <div class="reveal bg-cardBg/90 backdrop-blur-md border border-gray-800 rounded-3xl p-8 hover:border-amber-400/60 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-500/10 flex flex-col justify-between relative overflow-hidden group">
+                <div class="absolute top-0 right-0 bg-gray-800 text-amber-400 border-b border-l border-amber-500/30 font-bold px-5 py-1.5 rounded-bl-2xl text-xs">
+                    Eventos
+                </div>
+                <div>
+                    <div class="flex items-center space-x-4 mb-6">
+                        <span class="w-12 h-12 bg-amber-400 text-gray-950 rounded-2xl font-black text-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">2</span>
+                        <h3 class="text-2xl font-bold">Videos de Invitación para Eventos</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-300 mb-6">
+                        <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-amber-400"></i><span>Cumpleaños, Bodas y XV años.</span></li>
+                        <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-amber-400"></i><span>Eventos sociales o políticos.</span></li>
+                        <li class="flex items-center space-x-3 text-sm text-gray-400 pt-2"><i class="fa-solid fa-video text-amber-400"></i><span>Duración: 30 segundos a 1 minuto</span></li>
+                    </ul>
+                </div>
+                <div class="border-t border-gray-800 pt-6 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs text-gray-400 block">Según duración y tipo</span>
+                        <span class="text-2xl font-black text-amber-400">$99 - $199 <span class="text-sm font-normal text-gray-300">MXN</span></span>
+                    </div>
+                    <a href="https://wa.link/5q7oai" target="_blank" class="btn-shine bg-green-600 hover:bg-green-500 text-white font-bold px-5 py-2.5 rounded-xl transition-transform active:scale-95 shadow-md flex items-center space-x-2">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>Solicitar</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Servicio 3 -->
+            <div class="reveal bg-cardBg/90 backdrop-blur-md border border-gray-800 rounded-3xl p-8 hover:border-amber-400/60 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-500/10 flex flex-col justify-between relative overflow-hidden group">
+                <div class="absolute top-0 right-0 bg-gradient-to-r from-amber-400 to-yellow-500 text-gray-950 font-black px-5 py-1.5 rounded-bl-2xl text-xs uppercase tracking-wider shadow-md">
+                    Branding
+                </div>
+                <div>
+                    <div class="flex items-center space-x-4 mb-6">
+                        <span class="w-12 h-12 bg-amber-400 text-gray-950 rounded-2xl font-black text-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">3</span>
+                        <h3 class="text-2xl font-bold">Animación de Logotipos para Emprendedores</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-300 mb-6">
+                        <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-amber-400"></i><span>Dale movimiento y profesionalismo a tu marca.</span></li>
+                        <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-amber-400"></i><span>Ideal para redes sociales, presentaciones y anuncios.</span></li>
+                        <li class="flex items-center space-x-3 text-sm text-gray-400 pt-2"><i class="fa-solid fa-film text-amber-400"></i><span>Duración: 6 a 10 segundos</span></li>
+                    </ul>
+                </div>
+                <div class="border-t border-gray-800 pt-6 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs text-gray-400 block">Animación de logotipo</span>
+                        <span class="text-3xl font-black text-amber-400">$25 <span class="text-sm font-normal text-gray-300">MXN</span></span>
+                    </div>
+                    <a href="https://wa.link/5q7oai" target="_blank" class="btn-shine bg-green-600 hover:bg-green-500 text-white font-bold px-5 py-2.5 rounded-xl transition-transform active:scale-95 shadow-md flex items-center space-x-2">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>Solicitar</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Servicio 4 -->
+            <div class="reveal bg-cardBg/90 backdrop-blur-md border border-gray-800 rounded-3xl p-8 hover:border-amber-400/60 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-500/10 flex flex-col justify-between relative overflow-hidden group">
+                <div class="absolute top-0 right-0 bg-gray-800 text-amber-400 border-b border-l border-amber-500/30 font-bold px-5 py-1.5 rounded-bl-2xl text-xs">
+                    Web & Tienda
+                </div>
+                <div>
+                    <div class="flex items-center space-x-4 mb-6">
+                        <span class="w-12 h-12 bg-amber-400 text-gray-950 rounded-2xl font-black text-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">4</span>
+                        <h3 class="text-2xl font-bold">Página Web para Emprendimiento</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-300 mb-6">
+                        <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-amber-400"></i><span>Landing page profesional con botón directo a WhatsApp.</span></li>
+                        <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-amber-400"></i><span>Ideal para eventos, productos ganadores o servicios.</span></li>
+                        <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-amber-400"></i><span>Incluye tienda en línea (5 a 10 productos/paquetes).</span></li>
+                    </ul>
+                </div>
+                <div class="border-t border-gray-800 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs text-gray-400 block">Solo código: <strong class="text-amber-400">$199 MXN</strong></span>
+                        <span class="text-xs text-gray-400 block">Publicada por nosotros: <strong class="text-amber-400">$399 - $699 MXN</strong></span>
+                    </div>
+                    <a href="https://wa.link/5q7oai" target="_blank" class="btn-shine bg-green-600 hover:bg-green-500 text-white font-bold px-5 py-2.5 rounded-xl transition-transform active:scale-95 shadow-md flex items-center space-x-2 self-end sm:self-auto">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>Solicitar</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Sección Final CTA -->
+    <section id="contacto" class="relative z-10 py-20 border-t border-gray-800/80">
+        <div class="max-w-4xl mx-auto px-4 text-center reveal">
+            <div class="bg-gradient-to-br from-cardBg to-gray-900 border border-amber-500/40 rounded-3xl p-10 lg:p-14 shadow-2xl relative overflow-hidden">
+                <h2 class="text-3xl sm:text-5xl font-black mb-4">¡Cotización Gratuita!</h2>
+                <p class="text-gray-300 text-lg mb-8 max-w-xl mx-auto">
+                    Escríbenos directamente por WhatsApp y recibe atención personalizada para impulsar tu negocio hoy mismo.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <!-- Botón WhatsApp CTA Final (Verde con Blanco) -->
+                    <a href="https://wa.link/5q7oai" target="_blank" class="btn-shine w-full sm:w-auto bg-green-600 hover:bg-green-500 text-white font-extrabold px-8 py-4 rounded-2xl shadow-xl hover:shadow-green-500/30 transition-all transform hover:scale-105 flex items-center justify-center space-x-3 text-lg">
+                        <i class="fa-brands fa-whatsapp text-2xl text-white"></i>
+                        <span>WhatsApp: +52 777 271 3340</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer con enlace a Aviso de Privacidad -->
+    <footer class="relative z-10 bg-darkBg/90 border-t border-gray-800 py-8 text-center text-sm text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>&copy; 2026 CCMX - Soluciones Creativas de Calidad. Todos los derechos reservados.</p>
+            <button onclick="togglePrivacyModal()" class="text-amber-400/80 hover:text-amber-400 underline underline-offset-4 transition-colors cursor-pointer font-medium">
+                Aviso de Privacidad
+            </button>
+        </div>
+    </footer>
+
+    <!-- Cuadro Flotante (Modal) de Aviso de Privacidad Responsivo -->
+    <div id="privacy-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-opacity duration-300">
+        <div class="bg-cardBg border border-amber-500/40 rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative transform transition-all scale-95 opacity-0" id="privacy-modal-box">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-4 mb-4">
+                <div class="flex items-center space-x-2 text-amber-400">
+                    <i class="fa-solid fa-shield-halved text-xl"></i>
+                    <h3 class="text-lg sm:text-xl font-bold text-white">Aviso de Privacidad</h3>
+                </div>
+                <button onclick="togglePrivacyModal()" class="text-gray-400 hover:text-white p-1 rounded-lg transition-colors">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <div class="text-gray-300 text-xs sm:text-sm space-y-3 leading-relaxed max-h-[60vh] overflow-y-auto pr-1">
+                <p>
+                    <strong>1. Responsable de los Datos:</strong> CCMX, con contacto directo al teléfono +52 777 271 3340, es responsable del tratamiento y protección de los datos personales que nos proporciones voluntariamente al contactarnos.
+                </p>
+                <p>
+                    <strong>2. Finalidad del Tratamiento:</strong> La información compartida a través de WhatsApp u otros medios de contacto (como nombre, teléfono, logotipos o detalles de tu negocio) será utilizada única y exclusivamente para elaborar cotizaciones, diseñar los servicios digitales solicitados y dar seguimiento a tu proyecto.
+                </p>
+                <p>
+                    <strong>3. Protección y Confidencialidad:</strong> CCMX no vende, alquila ni comparte tus datos personales o materiales de marca con terceros ajenos a la prestación del servicio contratado.
+                </p>
+                <p>
+                    <strong>4. Derechos ARCO:</strong> En cualquier momento puedes solicitar el acceso, rectificación, cancelación u oposición al uso de tus datos enviando un mensaje directo a nuestro canal oficial de atención.
+                </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-800 flex justify-end">
+                <button onclick="togglePrivacyModal()" class="btn-shine bg-amber-400 hover:bg-amber-300 text-gray-950 font-bold px-6 py-2 rounded-xl text-sm transition-colors">
+                    Entendido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts para Interactividad (Cursor, Animación Scroll y Modal) -->
+    <script>
+        // 1. Efecto de luz siguiendo el cursor
+        const cursorGlow = document.getElementById('cursor-glow');
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+
+        // 2. Animación de aparición suave al hacer scroll
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            reveals.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 80) {
+                    el.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // 3. Control del Cuadro Flotante (Modal) de Aviso de Privacidad
+        const privacyModal = document.getElementById('privacy-modal');
+        const privacyModalBox = document.getElementById('privacy-modal-box');
+
+        function togglePrivacyModal() {
+            if (privacyModal.classList.contains('hidden')) {
+                privacyModal.classList.remove('hidden');
+                privacyModal.classList.add('flex');
+                setTimeout(() => {
+                    privacyModalBox.classList.remove('scale-95', 'opacity-0');
+                    privacyModalBox.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            } else {
+                privacyModalBox.classList.remove('scale-100', 'opacity-100');
+                privacyModalBox.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    privacyModal.classList.add('hidden');
+                    privacyModal.classList.remove('flex');
+                }, 200);
+            }
+        }
+
+        // Cerrar modal al hacer clic fuera del cuadro
+        privacyModal.addEventListener('click', (e) => {
+            if (e.target === privacyModal) {
+                togglePrivacyModal();
+            }
+        });
+    </script>
+</body>
+</html>
